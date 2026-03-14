@@ -460,6 +460,10 @@ sjcl.ecc.basicKey = {
       this._point = point;
     }
 
+    if (!this._point.isValid()) {
+      throw new sjcl.exception.corrupt("not on the curve!");
+    }
+
     this.serialize = function () {
       var curveName = sjcl.ecc.curveName(curve);
       return {
